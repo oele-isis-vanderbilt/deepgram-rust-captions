@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 repository = "https://github.com/oele-isis-vanderbilt/deepgram-rust-captions"
 homepage = "https://github.com/oele-isis-vanderbilt/deepgram-rust-captions"
-keywords = ["deepgram", "webvtt", "srt", "rust", "captions", "transcription"]
+keywords = ["deepgram", "webvtt", "srt", "captions", "transcription"]
 authors = ["Umesh Timalsina <umesh.timalsina@vanderbilt.edu>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
