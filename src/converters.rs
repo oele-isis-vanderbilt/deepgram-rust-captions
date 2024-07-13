@@ -17,7 +17,7 @@ impl DeepgramConverter {
     }
 
     /// Create a new DeepgramConverter from a JSON string.
-    pub fn from_str(json_response: &str) -> Self {
+    pub fn from_json_response(json_response: &str) -> Self {
         let dg_response: DeepgramResponse = serde_json::from_str(json_response).unwrap();
         Self::new(&dg_response)
     }

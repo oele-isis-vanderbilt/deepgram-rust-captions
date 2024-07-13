@@ -24,11 +24,11 @@ pub fn srt(converter: &DeepgramConverter, line_length: Option<u8>) -> String {
 
         output.push(format!("{} --> {}", start_time, end_time));
 
-        if first_word.speaker.is_some() {
-            if current_speaker.is_none() || current_speaker != first_word.speaker {
-                current_speaker = first_word.speaker;
-                output.push(format!("[speaker {}]", current_speaker.unwrap()));
-            }
+        if first_word.speaker.is_some()
+            && (current_speaker.is_none() || current_speaker != first_word.speaker)
+        {
+            current_speaker = first_word.speaker;
+            output.push(format!("[speaker {}]", current_speaker.unwrap()));
         }
 
         let punctuated_words = words
