@@ -1,5 +1,6 @@
 use crate::{converters::DeepgramConverter, helpers::seconds_to_timestamp};
 
+/// Convert a Deepgram response to an SRT string.
 pub fn srt(converter: &DeepgramConverter, line_length: Option<u8>) -> String {
     let mut output = Vec::<String>::new();
 

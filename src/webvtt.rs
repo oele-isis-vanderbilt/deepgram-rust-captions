@@ -1,5 +1,6 @@
 use crate::{converters::DeepgramConverter, helpers::seconds_to_timestamp};
 
+/// Convert a Deepgram response to a WebVTT string.
 pub fn webvtt(converter: &DeepgramConverter, line_length: Option<u8>) -> String {
     let mut output = vec!["WEBVTT".to_string(), "".to_string()];
 
@@ -34,7 +35,7 @@ pub fn webvtt(converter: &DeepgramConverter, line_length: Option<u8>) -> String 
 
         let speaker_label = if speaker_labels {
             let speaker = words[0].speaker.unwrap();
-            format!("<v {}>", speaker)
+            format!("<v Speaker {}>", speaker)
         } else {
             "".to_string()
         };
