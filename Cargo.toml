@@ -15,8 +15,6 @@ authors = ["Umesh Timalsina <umesh.timalsina@vanderbilt.edu>"]
 [dependencies]
 chrono = "0.4.38"
 deepgram = "0.5.0"
-regex = "1.10.5"
-serde = { version = "1.0.204", features = ["derive"] }
 serde_json = "1.0.120"
 
 [dev-dependencies]
