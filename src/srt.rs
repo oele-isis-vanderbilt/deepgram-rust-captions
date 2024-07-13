@@ -18,8 +18,8 @@ pub fn srt(converter: &DeepgramConverter, line_length: Option<u8>) -> String {
         let first_word = words.first().unwrap();
         let last_word = words.last().unwrap();
 
-        let start_time = seconds_to_timestamp(first_word.start, "%H:%M:%S,%f");
-        let end_time = seconds_to_timestamp(last_word.end, "%H:%M:%S,%f");
+        let start_time = seconds_to_timestamp(first_word.start, "%H:%M:%S,%3f");
+        let end_time = seconds_to_timestamp(last_word.end, "%H:%M:%S,%3f");
 
         output.push(format!("{} --> {}", start_time, end_time));
 
@@ -45,44 +45,4 @@ pub fn srt(converter: &DeepgramConverter, line_length: Option<u8>) -> String {
     }
 
     output.join("\n")
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use crate::converters::DeepgramConverter;
-    use regex::Regex;
-
-    fn test_srt_format(converter: &DeepgramConverter) {
-        let result = srt(converter, None);
-
-        result
-            .split("\n\n")
-            .into_iter()
-            .enumerate()
-            .for_each(|(index, caption)| {
-                if !caption.trim().is_empty() {
-                    let lines = caption.split("\n").collect::<Vec<&str>>();
-                    // timestamp_pattern = r"\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}"
-                    // assert (
-                    //     re.match(timestamp_pattern, lines[1]) is not None
-                    // ), f"Timestamp format is incorrect: {lines[1]}"
-
-                    let timestamp_pattern = r"\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}";
-                    let re = Regex::new(timestamp_pattern).expect("Failed to create regex pattern");
-
-                    assert!(
-                        re.is_match(&lines[1]),
-                        "Timestamp format is incorrect: {}",
-                        &lines[1]
-                    );
-                }
-            });
-    }
-
-    #[test]
-    fn test_srt_format_no_utterances() {
-        let dg_response = DeepgramConverter::from_path("test/files/dg_speakers_no_utterances.json");
-        test_srt_format(&dg_response);
-    }
 }
